@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pimpitcha Chinnapan - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+        --neon-yellow: #F8FFA1;
+        --soft-pink: #F6D5EE;
+        --lilac: #A8A3F6;
+        --navy: #243168;
+        --black: #0d0d0d;
+        --gray: #888;
+        --white: #fff;
+        }
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Inter', sans-serif;
+        background: var(--black);
+        color: var(--white);
+        line-height: 1.6;
+        }
+
+        header {
+        text-align: center;
+        padding: 4rem 1rem 2rem;
+        background: linear-gradient(135deg, var(--navy), var(--lilac));
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        }
+
+        header h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--neon-yellow);
+        margin-bottom: 1rem;
+        }
+
+        header p {
+        font-size: 1.2rem;
+        color: var(--soft-pink);
+        }
+
+        nav {
+        margin-top: 2rem;
+        }
+
+        nav a {
+        color: var(--white);
+        margin: 0 1rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+        }
+
+        nav a:hover {
+        color: var(--neon-yellow);
+        }
+
+        section {
+        max-width: 1000px;
+        margin: 3rem auto;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        background: #1a1a1a;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        border: 1px solid var(--navy);
+        }
+
+        section h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--lilac);
+        }
+
+        .profile-pic {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 4px solid var(--neon-yellow);
+        display: block;
+        margin: 0 auto 2rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+        transform: scale(1.05) rotate(2deg);
+        }
+
+        .skill-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        }
+
+        .skill-item {
+        background: var(--navy);
+        padding: 0.6rem 1.2rem;
+        border-radius: 2rem; /* This creates the pill shape */
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-block; /* Ensures it behaves like a block */
+        text-align: center;
+        white-space: nowrap; /* Prevents text from wrapping */
+        border: 2px solid transparent; /* Optional: adds a border */
+        }
+
+        .skill-item:hover {
+        background: var(--lilac);
+        color: var(--black);
+        transform: scale(1.05);
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem; /* Adds space between the buttons */
+            margin-top: 1rem;
+            flex-wrap: wrap; /* Allows buttons to stack on mobile */
+        }
+
+        .project-item {
+        background: #111;
+        padding: 1.5rem;
+        border-radius: 1.2rem;
+        border-left: 5px solid var(--neon-yellow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(248, 255, 161, 0.3);
+        }
+
+        .project-item h3 {
+        margin-bottom: 0.8rem;
+        color: var(--soft-pink);
+        }
+
+        .btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.8rem 1.6rem;
+        background: linear-gradient(90deg, var(--lilac), var(--navy));
+        border-radius: 2rem;
+        font-weight: 600;
+        color: var(--white);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+        background: linear-gradient(90deg, var(--neon-yellow), var(--soft-pink));
+        color: var(--black);
+        transform: translateY(-3px);
+        }
+
+        footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: var(--gray);
+        border-top: 1px solid var(--navy);
+        margin-top: 3rem;
+        }
+        .btn-outline {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.8rem 1.6rem;
+        background: transparent;
+        border: 2px solid var(--lilac);
+        border-radius: 2rem;
+        font-weight: 600;
+        color: var(--lilac);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+        background: var(--lilac);
+        color: var(--black);
+        transform: translateY(-3px);
+        }
+
+    </style>
+    </head>
+    <body>
+    <header>
+        <h1>Pimpitcha Chinnapan</h1>
+        <p>Business Information Technology Student | Aspiring Business Analyst</p>
+        <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <!-- Replace 'your-profile-picture.jpg' with your actual image file name -->
+        <img src="your-profile-picture.jpg" alt="Professional Headshot of Pimpitcha Chinnapan" class="profile-pic" />
+        <p>I am a detail-oriented and proactive Bachelor's student in Business Information Technology at KMITL, with a strong passion for business analytics. I enjoy leveraging technology and data to solve business problems and turn analysis into actionable solutions. I am currently seeking an internship where I can apply my skills in SQL, data analysis, and project leadership to support data-driven decision-making.</p>
+        <a href="YOUR_CV.pdf" download class="btn">Download My CV</a>
+    </section>
+
+        <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+            <h3>Programming & Databases</h3>
+            <div class="skill-items">
+                <span class="skill-item">SQL & Oracle</span>
+                <span class="skill-item">Python</span>
+                <span class="skill-item">JavaScript</span>
+                <span class="skill-item">HTML</span>
+                <span class="skill-item">CSS</span>
+                <!-- Removed R as requested -->
+            </div>
+        </div>
+        
+        <div class="skill-category">
+            <h3>Tools & Platforms</h3>
+            <div class="skill-items">
+                <span class="skill-item">Microsoft Excel</span>
+                <span class="skill-item">Power BI</span>
+                <span class="skill-item">Figma</span>
+                <span class="skill-item">VS Code</span>
+                <span class="skill-item">Oracle IFS</span>
+            </div>
+        </div>
+        
+        <div class="skill-category">
+            <h3>Business Analysis</h3>
+            <div class="skill-items">
+                <span class="skill-item">Requirements Gathering</span>
+                <span class="skill-item">Use Case Design</span>
+                <span class="skill-item">Process Mapping</span>
+                <span class="skill-item">Agile Methodology</span>
+            </div>
+        </div>
+        
+        <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-items">
+                <span class="skill-item">Thai</span>
+                <span class="skill-item">English</span>
+                <span class="skill-item">Japanese</span>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects">
+            <div class="project-item">
+                <h3>Pluto – Multi-Store Loyalty Platform (In Progress)</h3>
+                <p>Leading a team to design and prototype a centralized loyalty app. Designed the Oracle SQL database and defined system architecture for PDPA compliance.</p>
+                <!-- Replace with your actual GitHub link -->
+                <a href="https://github.com/yourusername/pluto-project" class="btn" target="_blank">View Code on GitHub</a>
+            </div>
+            <div class="project-item">
+                <h3>Sleepy Hoodie – Wearable Innovation</h3>
+                <p>Managed a team to research, design, and pitch a novel wearable product concept. Applied user-centered design principles and developed a full business model.</p>
+                <!-- PASTE YOUR GOOGLE DRIVE LINK HERE -->
+                <a href="https://drive.google.com/file/d/12h35CxEFiycZcwQrbtXrvdCUqjhcJhS-/view?usp=drive_link" class="btn-outline" target="_blank">View Pitch Deck (PDF)</a>
+            </div>
+            <div class="project-item">
+                <h3>STRICE – Sustainable Agri-Tech Initiative</h3>
+                <p>Researched and pitched a business model for the Hult Prize competition. Co-developed the financial strategy and built a Figma prototype for a supporting app.</p>
+                <div class="project-buttons">
+                    <!-- PASTE YOUR TWO GOOGLE DRIVE LINKS HERE -->
+                    <a href="https://docs.google.com/presentation/d/1AvH8qgDT44EqzjRCqNn4gI6B6SrCoMNC/edit?usp=drive_link&ouid=112813229981343902906&rtpof=true&sd=true" class="btn-outline" target="_blank">View PPTX</a>
+                    <a href="https://drive.google.com/file/d/1istPAyJktYUu2x-sd0JufWvvPIdchXTX/view?usp=drive_link" class="btn-outline" target="_blank">View PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out for opportunities or to connect!</p>
+        <a href="mailto:your.email@kmitl.ac.th" class="btn">Email Me</a>
+        <br>
+        <a href="https://www.linkedin.com/in/yourprofile/" class="btn" target="_blank" style="margin-top: 10px;">Connect on LinkedIn</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Pimpitcha Chinnapan. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth"
+            });
+        });
+        });
+    </script>
+</body>
+</html>
