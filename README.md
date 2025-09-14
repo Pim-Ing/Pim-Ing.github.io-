@@ -22,4 +22,5 @@ This site serves as an interactive CV, showcasing my academic projects, technica
 
 - **LinkedIn:** [Pimpitcha Chinnapan](www.linkedin.com/in/pimpitcha-chinnapan-297525346)
 - **Email:** [Pimpitcha5768@gmail.com](mailto:Pimpitcha5768@gmail.com)# Pim-Ing.github.io-
+
 A responsive portfolio website showcasing my projects and skills as an aspiring Business Analyst. Built with HTML, CSS, and JavaScript.
