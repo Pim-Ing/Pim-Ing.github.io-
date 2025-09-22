@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pimpitcha Chinnapan - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --white: #fdfefd;
+            --light-gray: #acafb4;
+            --dark-gray: #525a66;
+            --medium-gray: #939caa;
+        }
+        
+        *{box-sizing: border-box;}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark-gray);
+            padding-top: 80px;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5 { font-weight: 700; color: var(--dark-gray); }
+        a { color: inherit; }
+
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand { font-weight: 700; color: var(--dark-gray) !important; transition: all 0.3s ease; }
+        .navbar-brand:hover { transform: translateY(-2px); }
+        .nav-link { font-weight: 500; margin: 0 0.5rem; color: var(--dark-gray) !important; position: relative; transition: all 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--dark-gray); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { transform: translateY(-2px); }
+
+        /* Hero */
+        .hero { 
+            padding: 6rem 1rem; 
+            text-align: center; 
+            background: var(--white); 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .hero h1 { 
+            font-size: 2.8rem; 
+            margin-bottom: 1rem; 
+            transform: translateY(20px); 
+            opacity: 0; 
+            animation: fadeInUp 1s forwards 0.5s; 
+        }
+        .hero p { 
+            font-size: 1.2rem; 
+            color: var(--medium-gray); 
+            margin-bottom: 2rem; 
+            transform: translateY(20px); 
+            opacity: 0; 
+            animation: fadeInUp 1s forwards 0.7s; 
+        }
+        .hero-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+        .hero-highlight {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(82,90,102,0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .hero-highlight:hover {
+            transform: translateY(-3px);
+            background: rgba(82,90,102,0.1);
+        }
+        .hero-highlight-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--dark-gray);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .hero-highlight-text h5 {
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+        .hero-highlight-text p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .btn-main {
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            background: var(--dark-gray);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.5s;
+        }
+        .btn-main:hover::before { left: 100%; }
+        .btn-main:hover { background: var(--medium-gray); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .section { padding: 4rem 0; opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        .section-light { background: var(--white); }
+        .section-gray { background: #f8f9fa; }
+
+        .section-title { text-align: center; margin-bottom: 3rem; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .section.visible .section-title { opacity: 1; transform: translateY(0); }
+        .section-title::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--dark-gray); transition: width 0.5s ease; }
+        .section-title:hover::after { width: 100px; }
+
+        .skills-container { max-width: 900px; margin: 0 auto; }
+        .skill-category { margin-bottom: 2.5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .section.visible .skill-category { opacity: 1; transform: translateY(0); }
+        .skill-category:nth-child(1) { transition-delay: 0.1s; }
+        .skill-category:nth-child(2) { transition-delay: 0.2s; }
+        .skill-category:nth-child(3) { transition-delay: 0.3s; }
+        .skill-category:nth-child(4) { transition-delay: 0.4s; }
+        .skill-category:nth-child(5) { transition-delay: 0.5s; }
+        .skill-category h3 { margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--light-gray); color: var(--dark-gray); cursor: pointer; transition: all 0.3s ease; }
+        .skill-category h3:hover { color: var(--medium-gray); }
+        .skill-items { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-item { padding: 0.8rem 1.2rem; border-radius: 6px; background: var(--white); border: 1px solid var(--light-gray); font-weight: 500; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; position: relative; overflow: hidden; }
+        .skill-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-gray); opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+        .skill-item:hover { border-color: var(--dark-gray); transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); color: var(--white); }
+        .skill-item:hover::before { opacity: 1; }
+        .skill-item:hover .skill-icon { color: var(--white); }
+        .skill-icon { color: var(--dark-gray); font-size: 1rem; transition: all 0.3s ease; }
+
+        .projects-carousel { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .projects-carousel .carousel-item { padding: 2rem 0; }
+        .project-card { 
+            border: 1px solid var(--light-gray); 
+            border-radius: 8px; 
+            padding: 1.8rem; 
+            background: var(--white); 
+            transition: all 0.4s ease; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative; 
+            overflow: hidden; 
+            margin: 0 auto; 
+            max-width: 700px; 
+        }
+        .project-logo { 
+            height: 80px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 1.5rem; 
+            border-radius: 8px; 
+            font-size: 2.5rem; 
+            transition: all 0.3s ease; 
+        }
+        .project-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 25px rgba(0,0,0,0.08); 
+            border-color: var(--medium-gray); 
+        }
+        .project-card h3 { 
+            margin-bottom: 0.5rem; 
+            display:flex; 
+            align-items:center; 
+            gap:0.5rem; 
+        }
+        .project-name { 
+            font-size: 1.4rem; 
+            background: linear-gradient(135deg, var(--dark-gray), var(--medium-gray)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+        }
+        .project-card h4 { 
+            font-size: 1.1rem; 
+            color: var(--medium-gray); 
+            margin-bottom: 1rem; 
+            font-weight: 500; 
+        }
+        .project-card p { 
+            color: var(--medium-gray); 
+            margin-bottom: 1.5rem; 
+            flex-grow: 1; 
+        }
+        .project-status { 
+            display: inline-block; 
+            padding: 0.4rem 1rem; 
+            background: rgba(82,90,102,0.08); 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            margin-bottom: 1rem; 
+            color: var(--dark-gray); 
+            font-weight: 600; 
+        }
+        .status-placeholder { height: 2.2rem; margin-bottom: 1rem; } /* Added for consistent spacing */
+        .btn-outline { 
+            padding: 0.6rem 1.4rem; 
+            border-radius: 6px; 
+            border: 1px solid var(--dark-gray); 
+            color: var(--dark-gray); 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: all 0.3s ease; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .btn-outline:hover { 
+            background: var(--dark-gray); 
+            color: var(--white); 
+            text-decoration: none; 
+            transform: translateY(-2px); 
+        }
+        .project-buttons { 
+            display:flex; 
+            gap:0.8rem; 
+            flex-wrap:wrap; 
+        }
+
+        .carousel-indicators {
+            bottom: -50px;
+        }
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--dark-gray);
+            opacity: 0.5;
+        }
+        .carousel-indicators .active {
+            opacity: 1;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            color: #939caa; 
+            opacity: 0.8;
+            width: 5%;
+        }
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            color: var(--dark-gray);
+            opacity: 1;
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-image: none;
+            font-size: 1.8rem;
+            color: inherit;
+        }
+        .carousel-control-prev-icon:before {
+            content: '\f053';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+        .carousel-control-next-icon:before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .about-container { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 3rem; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+        .profile-img-rect { 
+            width: 320px; 
+            height: 400px; 
+            border-radius: 12px; 
+            overflow: hidden;
+            border: 3px solid var(--light-gray);
+            transition: all 0.5s ease; 
+            cursor: pointer; 
+            flex-shrink: 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .profile-img-rect img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .profile-img-rect:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12); 
+        }
+        .profile-img-rect:hover img {
+            transform: scale(1.05);
+        }
+        .about-text-content {
+            flex: 1;
+        }
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+            text-align: justify;
+        }
+
+        .contact-container { text-align: center; max-width: 600px; margin: 0 auto; }
+        .social-links { display:flex; justify-content:center; gap:1rem; margin-top:2rem; }
+        .social-links a { display:inline-flex; align-items:center; justify-content:center; width:45px; height:45px; border-radius:50%; background: var(--dark-gray); color: var(--white); font-size:1.1rem; transition: all 0.4s ease; text-decoration:none; }
+        .social-links a:hover { background: var(--medium-gray); transform: translateY(-3px); text-decoration:none; color: var(--white); }
+
+        footer { background: var(--dark-gray); padding: 3rem 0; text-align: center; color: var(--white); position: relative; overflow: hidden; }
+
+        @keyframes fadeInUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+        @media (max-width: 992px) { 
+            .projects-container { flex-direction: column; } 
+            .project-card { margin-bottom:1.5rem; } 
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-img-rect {
+                width: 280px;
+                height: 350px;
+                margin: 0 auto;
+            }
+            .about-text {
+                text-align: center; /* Center align on mobile */
+            }
+        }
+        @media (max-width: 768px) { 
+            .hero h1 { font-size:2.2rem; } 
+            .hero p { font-size:1.1rem; } 
+            .section { padding:3rem 0; } 
+            .skill-item { padding:0.6rem 1rem; } 
+            .project-buttons { flex-direction:column; align-items:flex-start; } 
+            .btn-outline { align-self:flex-start; } 
+            .projects-carousel {
+                max-width: 100%; /* Full width on mobile */
+                padding: 0 15px; /* Add some padding */
+            }
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 10%;
+            }
+            .hero-highlights {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .hero-highlight {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Pimpitcha Chinnapan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero section-light">
+        <div class="container text-center">
+            <h1>Pimpitcha Chinnapan</h1>
+            <p class="lead">Business Information Technology Student | Aspiring Business Analyst & Consultant</p>
+            
+            <div class="hero-highlights">
+                <div class="hero-highlight">
+                    <div class="hero-highlight-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="hero-highlight-text">
+                        <h5>Problem Solver</h5>
+                        <p>Analytical approach to challenges</p>
+                    </div>
+                </div>
+                <div class="hero-highlight">
+                    <div class="hero-highlight-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="hero-highlight-text">
+                        <h5>Data-Driven</h5>
+                        <p>Leveraging insights for decisions</p>
+                    </div>
+                </div>
+                <div class="hero-highlight">
+                    <div class="hero-highlight-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="hero-highlight-text">
+                        <h5>Team Leader</h5>
+                        <p>Cross-functional collaboration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section section-gray">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-container">
+                <div class="profile-img-rect">
+                    <img src="https://github.com/Pim-Ing/Pim-Ing.github.io-/raw/main/IMG_5478.JPG" alt="Pimpitcha Chinnapan">
+                </div>
+                <div class="about-text-content">
+                    <p class="about-text">
+                        I'm a Business Information Technology student at KMITL with a passion for solving complex business problems through data-driven insights and strategic thinking. With proven leadership experience across multiple projects, I excel at turning analysis into actionable solutions that drive meaningful impact.
+                    </p>
+                    
+                    <p class="about-text">
+                        I'm currently seeking an internship where I can apply my skills in business analytics, project leadership, and problem-solving to support data-informed decision-making.
+                    </p>
+                    
+                    <a href="https://drive.google.com/file/d/1Lxp1p3f1qL4Zg-3d3EuTFQsgSFd0SF2i/view?usp=sharing" class="btn-main"  target="_blank" id="downloadCV">Download My CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming & Databases</h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><i class="skill-icon fas fa-database"></i><span>SQL & Oracle</span></div>
+                        <div class="skill-item"><i class="skill-icon fab fa-python"></i><span>Python</span></div>
+                        <div class="skill-item"><i class="skill-icon fab fa-js"></i><span>JavaScript</span></div>
+                        <div class="skill-item"><i class="skill-icon fab fa-html5"></i><span>HTML</span></div>
+                        <div class="skill-item"><i class="skill-icon fab fa-css3-alt"></i><span>CSS</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><i class="skill-icon fas fa-table"></i><span>Microsoft Excel</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-chart-bar"></i><span>Power BI</span></div>
+                        <div class="skill-item"><i class="skill-icon fab fa-figma"></i><span>Figma</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-code"></i><span>VS Code</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-server"></i><span>Oracle IFS</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Business Analysis</h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><i class="skill-icon fas fa-clipboard-list"></i><span>Requirements Gathering</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-object-group"></i><span>UML Diagram</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-project-diagram"></i><span>Process Mapping</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-tasks"></i><span>Agile Methodology</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Leadership & Project Management</h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><i class="skill-icon fas fa-users"></i><span>Team Leadership</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-bullhorn"></i><span>Strategic Pitch Development</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-tasks"></i><span>Project Coordination</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-lightbulb"></i><span>Innovation Strategy</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><i class="skill-icon fas fa-language"></i><span>Thai</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-language"></i><span>English</span></div>
+                        <div class="skill-item"><i class="skill-icon fas fa-language"></i><span>Japanese</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects (Carousel that auto-slides every 5s) -->
+    <section id="projects" class="section section-gray">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+
+            <div id="projectsCarousel" class="carousel slide projects-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="project-card pluto">
+                            <div class="project-logo"><i class="fas fa-cart-shopping"></i></div>
+                            <span class="project-status">In Progress</span>
+                            <h3><span class="project-name">PLUTO</span></h3>
+                            <h4>Multi-Store Loyalty Platform</h4>
+                            <p>Leading a team to design and prototype a centralized loyalty app. Designed the Oracle SQL database and defined system architecture for PDPA compliance.</p>
+                            <div class="project-buttons">
+                                <a href="https://github.com/Pim-Ing/Pluto-loyalty-platform" class="btn-outline" target="_blank"><i class="fab fa-github"></i> View Code</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="project-card jackie">
+                            <div class="project-logo"><i class="fas fa-tshirt"></i></div>
+                            <span class="project-status">Completed</span>
+                            <h3><span class="project-name">JACKIE</span></h3>
+                            <h4>Sleepy Hoodie Innovation</h4>
+                            <p>Managed a team to research, design, and pitch a novel wearable product concept. Applied user-centered design principles and developed a full business model.</p>
+                            <div class="project-buttons">
+                                <a href="https://drive.google.com/file/d/12h35CxEFiycZcwQrbtXrvdCUqjhcJhS-/view?usp=sharing" class="btn-outline" target="_blank"><i class="fas fa-external-link-alt"></i> View Pitch Deck</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="project-card strice">
+                            <div class="project-logo"><i class="fas fa-head-side-mask"></i></div>
+                            <span class="project-status">Completed</span>
+                            <h3><span class="project-name">STRICE</span></h3>
+                            <h4>Sustainable Agri-Tech Initiative</h4>
+                            <p>Researched and pitched a business model for the Hult Prize competition. Co-developed the financial strategy and built a Figma prototype for a supporting app.</p>
+                            <div class="project-buttons">
+                                <a href="https://docs.google.com/presentation/d/1AvH8qgDT44EqzjRCqNn4gI6B6SrCoMNC/edit?usp=sharing&ouid=112813229981343902906&rtpof=true&sd=true" class="btn-outline" target="_blank"><i class="fas fa-file-powerpoint"></i> Presentation</a>
+                                <a href="https://drive.google.com/file/d/1istPAytYUu2x-sd0JufWvvPIdchXTX/view?usp=sharing" class="btn-outline" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel indicators -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-container">
+                <p class="mb-4">Feel free to reach out for opportunities or to connect!</p>
+                <a href="mailto:Pimpitcha5768@gmail.com" class="btn-main mb-4"><i class="fas fa-envelope me-2"></i> Email Me</a>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/pimpitcha-chinnapan-297525346" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Pim-Ing" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/share/1B4u5kBJnq/?mibextid=wwXIfr" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ing_pimpitcha?igsh=MWZkdmF1d2wyajZ6NA%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2025 Pimpitcha Chinnapan. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a.nav-link, .btn-main[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || !href.startsWith('#')) return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                navbar.style.padding = '0.8rem 0';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+                navbar.style.padding = '1rem 0';
+            }
+        });
+
+        function checkScroll() {
+            const sections = document.querySelectorAll('.section');
+            const projectCards = document.querySelectorAll('.project-card');
+            const windowHeight = window.innerHeight;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionVisible = 150;
+                if (sectionTop < windowHeight - sectionVisible) {
+                    section.classList.add('visible');
+                }
+            });
+
+            projectCards.forEach((card, index) => {
+                const position = card.getBoundingClientRect().top;
+                if (position < windowHeight - 100) {
+                    setTimeout(() => { card.style.opacity = 1; card.style.transform = 'translateY(0)'; }, index * 200);
+                }
+            });
+        }
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+ 
+        const skillCategories = document.querySelectorAll('.skill-category h3');
+        skillCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                const items = this.nextElementSibling;
+                if (items) items.classList.toggle('active');
+            });
+        });
+
+        const projectsCarouselEl = document.getElementById('projectsCarousel');
+        if (projectsCarouselEl) {
+            const carousel = new bootstrap.Carousel(projectsCarouselEl, { interval: 5000, ride: 'carousel', pause: 'hover' });
+        }
+
+    </script>
+</body>
+</html>
